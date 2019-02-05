@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1 id="countSet"></h1>
+<h1 id="countSetItem"></h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Salary</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<script src="js/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+       var ajaxConfig={
+           method:"HEAD",
+           url:"http://localhost:3000/api/v1/customers",
+           async:true
+       }
+        $.ajax(ajaxConfig).done(function (responseText,statusText,jxhr) {
+            var custermerCount =jxhr.getResponseHeader("X-Count");
+            $("#countSet").text(custermerCount);
+        }).fail(function (jxhr,statusText,error) {
+
+        });
+
+        var ajaxConfig1={
+            method:"HEAD",
+            url:"http://localhost:3000/api/v1/items",
+            async:true
+        }
+        $.ajax(ajaxConfig1).done(function (responseText,statusText,jxhr) {
+            var ItemCount =jxhr.getResponseHeader("X-Count");
+            $("#countSetItem").text(ItemCount);
+        }).fail(function (jxhr,statusText,error) {
+
+        });
+
+        var ajaxConfig2={
+            method:"GET",
+            url:"http://localhost:3000/api/v1/customers",
+            async:true
+        }
+        $.ajax(ajaxConfig2).done(function (responseText,statusText,jxhr) {
+            console.log(responseText);
+            console.log(responseText.length);
+            console.log(responseText[1].name);
+
+            for(let a=0;a<responseText.length;a++){
+                let b =responseText[a].name;
+                let c =responseText[a].id;
+                let d =responseText[a].address;
+                let e =responseText[a].salary;
+                var html =`<tr><td>${c}</td><td>${b}</td><td>${d}</td><td>${e}</td><td><button class="btn btn-danger del">Delete</button></td></tr>`;
+                $("table tbody").append(html);
+            }
+
+
+        }).fail(function (jxhr,statusText,error) {
+
+        });
+    });
+</script>
+</body>
+</html>
