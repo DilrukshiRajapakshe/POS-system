@@ -3,9 +3,10 @@ import {ItemDAOImpl} from "./custom/impl/Item-dao-impl";
 import {PoolConnection} from "mysql";
 import {OrderDetailsDAOImpl} from "./custom/impl/orderdetails-dao-impl";
 import {OrderDAOImpl} from "./custom/impl/order-dao-impl";
+import {FileDAOImpl} from "./custom/impl/file-dao-impl";
 
 export enum DAOTypes{
-    CUSTOMER, ITEM ,ORDERS,ORDERDETAILS
+    CUSTOMER, ITEM ,ORDERS,ORDERDETAILS,FILEDETAIL
 }
 
 export function getDAO(daoType: DAOTypes, connection: PoolConnection){
@@ -18,6 +19,8 @@ export function getDAO(daoType: DAOTypes, connection: PoolConnection){
             return new OrderDAOImpl(connection);
         case DAOTypes.ORDERDETAILS:
             return new OrderDetailsDAOImpl(connection);
+        case DAOTypes.FILEDETAIL:
+            return new FileDAOImpl(connection);
         default:
             return null;
     }
