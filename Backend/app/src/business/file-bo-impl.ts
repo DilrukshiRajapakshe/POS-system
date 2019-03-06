@@ -3,6 +3,7 @@ import {pool} from "../db/db-pool";
 import {DAOTypes, getDAO} from "../dao/dao-factory";
 import Promise = require("promise");
 import {FileDAO} from "../dao/custom/file-dao";
+import axios = require("axios");
 
 export class FileBoImpl{
 

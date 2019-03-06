@@ -2,7 +2,7 @@ import Promise = require("promise");
 import {File} from "../../../entity/file";
 import {PoolConnection} from "mysql";
 import {FileDAO} from "../file-dao";
-
+import axios = require("axios");
 
 export class FileDAOImpl implements FileDAO {
 

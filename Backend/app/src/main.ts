@@ -1,4 +1,6 @@
 import express = require("express");
+import axios = require("axios");
+
 import mainDespatcher from "./dispatcher/main-dispatcher";
 
 const app = express();
